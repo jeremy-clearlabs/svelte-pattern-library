@@ -1,1 +1,2 @@
-export { default as default } from './Component.svelte';
+export { Pagination } from './Pagination.svelte';
+export { PaginationPageItem } from './PaginationPageItem.svelte';
