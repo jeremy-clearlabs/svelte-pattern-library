@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
   import PaginationPageItem, {
     PAGE_ITEM_TYPE_NEXT,
     PAGE_ITEM_TYPE_PREVIOUS,
@@ -6,14 +8,15 @@
     PAGE_ITEM_TYPE_PAGE,
   } from "./PaginationPageItem";
   import fetchPageNumbers from "../utils/fetchPageNumbers";
-  import isNumeric from "../utils/isNumeric";
+
+  const dispatch = createEventDispatcher();
 
   export let ariaLabel;
   export let offset = 0;
   export let pageLimit = 10;
   export let pageNeighbours = 2;
   export let totalRecords = 0;
-  // export let onPageChanged;
+  export let paginationInput = false;
 
   let currentPage = 1;
   let totalPages = 0;
@@ -43,46 +46,18 @@
 
     currentPage = nextCurrentPage;
 
-    // const paginationData = {
-    //   currentPage: nextCurrentPage,
-    //   totalPages,
-    //   pageLimit,
-    //   totalRecords,
-    // };
-    // onPageChanged && onPageChanged(paginationData);
+    dispatch('onPageChanged', {
+      currentPage,
+      totalPages,
+      pageLimit,
+      totalRecords,
+    })
   };
 
-  const handleClick = (page) => (evt) => {
-    evt.preventDefault();
-    gotoPage(page);
-  };
-
-  const handleMoveNeighboursLeft = () => {
-    gotoPage(currentPage - pageNeighbours * 2 - 1);
-  };
-
-  const handleMoveNeighboursRight = () => {
-    gotoPage(currentPage + pageNeighbours * 2 + 1);
-  };
-
-  const handleMoveLeft = () => {
-    gotoPage(currentPage - 1);
-  };
-
-  const handleMoveRight = () => {
-    gotoPage(currentPage + 1);
-  };
-
-  const onInputPageChange = () => {
-    if (inputPage) {
-      gotoPage(inputPage);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    if (isNumeric(event.target.value)) {
-      inputPage = parseInt(event.target.value, 10);
-    } else {
+  const handleInputPageChange = () => {
+    console.log(inputPage);
+    if (Number.isInteger(inputPage)) {
+      gotoPage(parseInt(inputPage, 10));
       inputPage = null;
     }
   };
@@ -103,18 +78,18 @@
   <div aria-label={ariaLabel}>
     <ul class="list">
       <PaginationPageItem
-        on:click={handleMoveLeft}
+        on:click={() => gotoPage(currentPage - 1)}
         pageItemType={PAGE_ITEM_TYPE_PREVIOUS} />
       {#each pages as page, index}
         {#if page === LEFT_PAGE}
           <PaginationPageItem
             key={`page_item_${index.toString()}`}
-            on:click={handleMoveNeighboursLeft}
+            on:click={() => gotoPage(currentPage - pageNeighbours * 2 - 1)}
             pageItemType={PAGE_ITEM_TYPE_PREVIOUS} />
         {:else if page === RIGHT_PAGE}
           <PaginationPageItem
             key={`page_item_${index.toString()}`}
-            on:click={handleMoveNeighboursRight}
+            on:click={() => gotoPage(currentPage - pageNeighbours * 2 + 1)}
             pageItemType={PAGE_ITEM_TYPE_NEXT} />
         {:else if page === BETWEEN_PAGE}
           <PaginationPageItem
@@ -123,19 +98,21 @@
         {:else}
           <PaginationPageItem
             key={`page_item_${index.toString()}`}
-            on:click={handleClick(page)}
+            on:click={() => gotoPage(page)}
             pageItemType={PAGE_ITEM_TYPE_PAGE}
             number={page}
             selected={currentPage === page} />
         {/if}
       {/each}
-      <PaginationPageItem on:click={handleMoveRight} next />
-      <input
-        type="number"
-        id="pagination-to"
-        placeholder="Go To"
-        on:change={handleInputChange} />
-      <button on:click={onInputPageChange}>Go</button>
+      <PaginationPageItem on:click={() => gotoPage(currentPage + 1)} next />
+      {#if paginationInput}
+        <input
+          type="number"
+          id="pagination-to"
+          placeholder="Go To"
+          bind:value={inputPage} />
+        <button on:click={handleInputPageChange}>Go</button>
+      {/if}
     </ul>
   </div>
 {/if}

@@ -16,7 +16,7 @@
   const dispatch = createEventDispatcher();
 
   function clickHandler() {
-    dispatch("click");
+    dispatch("onClick", { pageItemType, number });
   }
 </script>
 

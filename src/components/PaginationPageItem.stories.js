@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import PaginationPageItem, {
   PAGE_ITEM_TYPE_NEXT,
   PAGE_ITEM_TYPE_PREVIOUS,
@@ -26,11 +27,15 @@ export default {
   },
 };
 
-const Template = ({ onClick, ...args }) => ({
+const actionsData = {
+  onClick: action('click'),
+};
+
+const Template = ({ ...args }) => ({
   Component: PaginationPageItem,
   props: args,
   on: {
-    click: onClick,
+    ...actionsData,
   },
 });
 
@@ -40,7 +45,6 @@ NextPageItem.args = {
   pageItemType: PAGE_ITEM_TYPE_NEXT,
   selected: false,
   number: null,
-  onClick: () => {},
 };
 
 export const Previous = Template.bind({});
@@ -49,7 +53,6 @@ Previous.args = {
   pageItemType: PAGE_ITEM_TYPE_PREVIOUS,
   selected: false,
   number: null,
-  onClick: () => {},
 };
 
 export const Between = Template.bind({});
@@ -58,5 +61,12 @@ Between.args = {
   pageItemType: PAGE_ITEM_TYPE_BETWEEN,
   selected: false,
   number: null,
-  onClick: () => {},
+};
+
+export const SelectedNumber = Template.bind({});
+
+SelectedNumber.args = {
+  pageItemType: PAGE_ITEM_TYPE_PAGE,
+  selected: true,
+  number: 1,
 };
