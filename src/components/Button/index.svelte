@@ -55,7 +55,6 @@
     tabindex,
     disabled,
     href,
-    ...$$restProps,
     class: [
       "btn",
       size === "field" && "btn--field",
@@ -71,6 +70,7 @@
     ]
       .filter(Boolean)
       .join(" "),
+    ...$$restProps,
   };
 </script>
 
