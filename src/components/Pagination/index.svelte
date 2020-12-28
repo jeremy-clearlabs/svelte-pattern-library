@@ -6,7 +6,7 @@
     PAGE_ITEM_TYPE_PREVIOUS,
     PAGE_ITEM_TYPE_BETWEEN,
     PAGE_ITEM_TYPE_PAGE,
-  } from "../PaginationPageItem/PaginationPageItem.svelte";
+  } from "../PaginationPageItem";
   import fetchPageNumbers from "../../utils/fetchPageNumbers";
 
   const dispatch = createEventDispatcher();

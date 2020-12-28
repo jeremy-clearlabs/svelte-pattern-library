@@ -1,4 +1,4 @@
-import Pagination from './Pagination.svelte';
+import Pagination from './index.svelte';
 import { action } from '@storybook/addon-actions';
 
 export default {
