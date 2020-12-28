@@ -54,6 +54,6 @@ const Template = ({ ...args }) => ({
   },
 });
 
-export const DefaultButton = Template.bind({});
+export const ButtonGroup = Template.bind({});
 
-DefaultButton.args = {};
+ButtonGroup.args = {};
