@@ -1,26 +1,26 @@
-# component-template
+# Svelte Pattern Library
 
-A base for building shareable Svelte components. Clone it with [degit](https://github.com/Rich-Harris/degit):
+A base svelte pattern library with minimal styling.
 
-```bash
-npx degit sveltejs/component-template my-new-component
-cd my-new-component
-npm install # or yarn
-```
+## Purpose
 
-Your component's source code lives in `src/Component.svelte`.
-
-You can create a package that exports multiple components by adding them to the `src` directory and editing `src/index.js` to reexport them as named exports.
-
-TODO
-
-- [ ] some firm opinions about the best way to test components
-- [ ] update `degit` so that it automates some of the setup work
+This repository is not intended for production use. It is intended to understand differen UI patterns.
+That said, the components are bundled via Rollup and will be registered into npm for further
 
 ## Setting up
 
 - Run `npm init` (or `yarn init`)
 - Replace this README with your own
+
+## TODOs
+
+- [ ] Setup Testing with jest + storybook storyshots
+- [ ] Include more components ++
+- [ ] Add an a11y checker
+- [ ] Look through React Reach, React Remix, and Material UI for inspiration and following W3C rules
+- [ ] Export to webcomponents
+- [ ] Deploy storybook online
+- [ ] Consume components for another repo for the docs website
 
 ## Consuming components
 
