@@ -3,14 +3,14 @@
   import { cubicOut } from 'svelte/easing';
 
   export let duration = 400;
-  export let tween = 0;
+  export let progress = 0;
 
-	const progress = tweened(0, {
+	const progressTweened = tweened(0, {
 		duration,
 		easing: cubicOut
   });
 
-  $: progress.set(tween);
+  $: progressTweened.set(progress);
 </script>
 
 <style>
@@ -20,4 +20,4 @@
 	}
 </style>
 
-<progress value={$progress}></progress>
+<progress value={$progressTweened}></progress>

@@ -6,17 +6,21 @@ export default {
   title: 'Components/Button',
   component: Button,
   argTypes: {
-    kind: {
+    variant: {
       control: {
         type: 'select',
         options: [
           'primary',
           'secondary',
           'tertiary',
-          'ghost',
           'danger',
-          'danger-tertiary',
-          'danger-ghost',
+          'warning',
+          'info',
+          'success',
+          // 'danger-tertiary',
+          // 'warning-tertiary',
+          // 'info-tertiary',
+          // 'success-tertiary',
         ],
       },
     },
@@ -57,3 +61,8 @@ const Template = ({ ...args }) => ({
 export const ButtonGroup = Template.bind({});
 
 ButtonGroup.args = {};
+
+export const DefaultButton = (args) => ({
+  Component: Button,
+  props: args,
+});

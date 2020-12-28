@@ -1,12 +1,12 @@
-import Progress from './index.svelte';
+import ProgressBar from './index.svelte';
 import ProgressView from './ProgressView.svelte';
 
 export default {
-  title: 'Components/Progress',
-  component: Progress,
+  title: 'Components/ProgressBar',
+  component: ProgressBar,
   argTypes: {
     duration: { control: 'number' },
-    tween: { control: 'number' },
+    progress: { control: 'number' },
   },
 };
 
@@ -19,5 +19,5 @@ export const DefaultButton = Template.bind({});
 
 DefaultButton.args = {
   duration: 400,
-  tween: 0
+  progress: 0
 };

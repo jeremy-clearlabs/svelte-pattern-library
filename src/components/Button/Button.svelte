@@ -1,11 +1,13 @@
 <script>
   import "../../main.css";
 
+  /** Specify the `type` attribute for the button element */
+  export let type = "button";
   /**
    * Specify the kind of button
    * @type {"primary" | "secondary" | "tertiary" | "danger" | "danger-tertiary" | "warning" | "warning-tertiary" | "info" | "info-tertiary" | "success" | "success-tertiary"}
    */
-  export let variant = "primary";
+  export let variant = type === "link" ? "link" : "primary";
   /**
    * Specify the size of button
    * @type {"default" | "field" | "small"}
@@ -43,8 +45,7 @@
   export let href = undefined;
   /** Specify the tabindex */
   export let tabindex = "0";
-  /** Specify the `type` attribute for the button element */
-  export let type = "button";
+
   /** Obtain a reference to the HTML element */
   export let ref = null;
 
@@ -80,6 +81,10 @@
     border-width: 0;
     padding: 0.8rem 0.4rem;
     cursor: pointer;
+    border-radius: 4px;
+  }
+  .btn[disabled] {
+    cursor: not-allowed;
   }
   .btn--field {
     padding: 1rem 0.5rem;
@@ -115,6 +120,19 @@
     background-color: var(--color-success);
     color: var(--color-dark);
   }
+  .btn--light {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+  }
+  .btn--dark {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+  .btn--link {
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 </style>
 
 <button
@@ -127,7 +145,7 @@
   {#if hasIconOnly}
     <span class:bx--assistive-text={true}>{iconDescription}</span>
   {/if}
-  <slot />
+  <slot>Button</slot>
   <svelte:component
     this={icon}
     aria-hidden="true"
