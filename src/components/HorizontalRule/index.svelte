@@ -5,4 +5,4 @@
   }
 </style>
 
-<hr class="horizontal-rule" />
+<hr class="horizontal-rule" aria-hidden="true" />
